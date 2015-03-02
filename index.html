@@ -142,13 +142,13 @@
             <script type="text/template">
 ## Fabalicious
 
-- Fabric-Tasks für wiederkehrende drupal-Administrations-Tasks
-- z.B: deployment: Backup der DB, git pull, feature-rever, Update DB, cache clear alle
-- Z.B: Migration: copyFrom Export von DB und User-Files von einer Instanz zur nächsten, z.b Update der Staging- oder lokalen Umgebung mit Daten der Live-Site.
-- Drupal-Core-Updates
+- Fabric-Tasks für wiederkehrende Drupal-Administrations-Tasks
+- z.B: deployment: Backup der DB, git pull, feature-revert, Update DB, cache clear all
+- z.B: Migration: copyFrom Export von DB und User-Files von einer Instanz zur nächsten, z.b Update der Staging- oder lokalen Umgebung mit Daten der Live-Site.
+- Drupal-Core Source-Upgrades
 - Behat-Testing
 - Backup / Restore von DB + Files
-- docker-spezifische Tasks
+- Docker-spezifische Tasks
 - https://github.com/factorial-io/fabalicious
 
             </script>
@@ -160,8 +160,8 @@
 ## Das alles im täglichen Einsatz
 
 - Vagrant + [Multibasebox](https://github.com/factorial-io/multibasebox) als virtueller Host für alle Docker Instanzen
-- [drupal-docker](https://github.com/factorial-io/drupal-docker) als Host für eine drupal-Applikation
-- drupal-docker lässt sich sowohl lokal als auch als dev-Installationen benutzen
+- [drupal-docker](https://github.com/factorial-io/drupal-docker) als dev-Host für eine Drupal-Applikation
+- drupal-docker lässt sich sowohl lokal als auch für dev-Installationen benutzen
 - fabalicious zum Rauf-, Runterfahren und Administration der Docker-Instanzen
 - einfaches Erstellen von Drupal-Installationen für feature-Branches
 
@@ -175,6 +175,16 @@
 
 - Yeoman basierter Generator der einem automatisch eine neue Drupal-Installation in Multibasebox erstellt.
 - https://github.com/factorial-io/generator-jaMann
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+## Vielen Dank
+
+Volkan Flörchinger + Stephan Huber
+https://github.com/stmh/fabalicious-slide
             </script>
           </section>
         </section>
