@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Kurze Einführung in Behat</title>
+		<title>Ein kurzer Ausblick auf automatisiertes Deployment</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -43,308 +43,141 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Behat / Mink</h1>
-					<h3>BDD Made Easy</h3>
-					<p>
-						<small><a href="http://stephanmaximilianhuber.com">Stephan Huber</a> / <a href="http://twitter.com/stephanhuber">@stephanhuber</a></small>
+					<h1>Ein kurzer Ausblick auf automatisiertes Deployment</h1>
+          <p>
+						<small>von <a href="http://factrorial.io">factorial.io</a></small>
 					</p>
 				</section>
 
 				<section>
-					<section>
-						<h2>BDD</h2>
-						<p>
-							Behavior Driven Development (BDD) kommt aus der agilen Software-Entwicklung. Bei Scrum werden die Anforderungen an ein Produkt in Epics und diese weiter in User-Stories zerstückelt. Dies machen im Normalfalle der Product-Owner (Kunde und/oder Projekt-Manager).
-						</p>
-					</section>
 					<section  data-markdown>
-						<script type="text/template">
-## BDD
+            <script type="text/template">
+## Code Driven Development
 
-Die User-Stories beschreiben in verklausuliertem Englisch, das was ein User machen kann und welches Ergebniss er bekommt, und was es für das Produkt bedeutet.
+- http://drupal.org/project/features
+- Konfiguration im Version control anstatt der Datenbank
+- Deployment Modul
+  - http://dcycleproject.org/blog/44/what-site-deployment-module
+  - Features und Erweiterungen an / ausschalten
 
-```
-As a <type of user>, I want <some goal> so that <some reason>.
-```
-						</script>
-					</section>
-					<section>
-						<h2>BDD</h2>
-						<p>
-							BDD übernimmt diesen Ansatz und versucht daraus gleich Tests zu entwickeln, die die jeweilige User-Story/Feature abdeckt. Auch die Tests werden vom Product-Owner oder von der QA in verklausuliertem <a href="http://docs.behat.org/en/v2.5/guides/1.gherkin.html">Englisch</a> geschrieben.
-						</p>
-					</section>
-					<section>
-						<p>
-							Die Developer entwickeln nun gegen diese festgehaltenen Features und zwar solange bis alle Tests nicht mehr failen. Ändert sich nun was an den Anforderungen, so ändert der Product-Owner die Userstory und die dazugehörigen Features.
-						</p>
-					</section>
+            </script>
+          </section>
+          <section  data-markdown>
+            <script type="text/template">
+## Vorteile
+
+- develop once, deploy many
+
+            </script>
+          </section>
+          <section  data-markdown>
+            <script type="text/template">
+## Nachteile
+
+- Nicht alle contrib-Module unterstützen Features, bzw. den Export der Konfiguration
+- git-merges von automatisch generiertem Code werden ggf kompliziert.
+- am Anfang zeitaufwändiger
+
+            </script>
+          </section>
 				</section>
-
-				<section>
-					<section  data-markdown>
-						<script type="text/template">
-## Behat
-
-Behat ist eine PHP-Implementierung von BDD. Mithilfe der Extension Mink kann auch Javascript und CSS getestet werden. Es gibt auch eine DrupalExtension dafür, die die Integration mit Drupal-Installationen vereinfacht.
-
-* [Behat](http://docs.behat.org/en/v2.5/)
-* [Mink](http://behat.readthedocs.org/en/v2.5/cookbook/behat_and_mink.html)
-* [DrupalExtension](https://www.drupal.org/project/drupalextension)
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Installation
-
-Hier nur kurz die Rahmenbedingungen für die behat-Installationen:
-
-Normalerweise [installiere](http://behat-drupal-extension.readthedocs.org/en/latest/localinstall.html) ich behat in unseren Projekt-Folder unter ``_/tools/behat`` und füge die Ordner ``bin`` und ``vendor`` der ``.gitignore`` hinzu.
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+![Vagrant](images/vagrant_720.png)
 
 
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Usage
+## Vagrant
 
-Fabalicious hat einen eigenen Task um die Tests in der Docker-Box auszuführen:
-```
-fabalicious config:<local|mbb|something-else> behat
-```
+- Isolierte lokale Umgebung
+- Headless vmware  / virtualbox
+- Provisioner (fabric, puppet, chef)
+- Einfach in der nutzung $ vagrant up / provision
+- http://vagrantup.com
 
-bzw:
-
-```
-fabalicious config:<config> behat:name="<name-des-features>"
-```
-						</script>
-					</section>
-				</section>
-				<section>
-					<section  data-markdown>
-						<script type="text/template">
-## Einen Test schreiben
-
-Tests sollten im Rahmen der Konzeption gleich mitgeschrieben werden, oder wenn man plant grössere Teile zu refaktorieren, um sicherzustellen, das APIs etc noch gleich funktionieren.
-
-Tests werden in Features gruppiert, die in einer Text-Datei mit der Datei-Endung ``.feature`` landen. Diese widerrum landet im jeweiligen features-Ordner.
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Header einer Feature-Datei
-
-```
-Feature: <Name des Features>
-  In order to <intent>
-  As a <user-role> user
-  I need to be able <requirements>
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Scenario einer Feature-Datei
-
-```
-Scenario: Some description of the scenario
-  Given [some context]
-  When [some event]
-  Then [outcome]
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Scenario einer Feature-Datei
-
-```
-Scenario: Some description of the scenario
-  Given [some context]
-    And [more context]
-   When [some event]
-    And [second event occurs]
-   Then [outcome]
-    And [another outcome]
-    But [another outcome]
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Scenario-Outlines
-
-Bieten sich an, um mehrere Werte-Paare mit einem Test abzudecken. Die jeweils ersten EInträge der Tabelle werden als Platzhalter benutzt.
-
-```
-Scenario Outline: Some description of the scenario
-  Given [some context using]
-    And [more context]
-   When [some event]
-    And [second event occurs]
-   Then [outcome]
-    And [another outcome]
-    But [another outcome]
-Examples:
-  | field_name_1 | field_name_2 |
-  | value 1      | value 2      |
-  | value 3      | value 3      |
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Tags
-
-Man kann Features oder auch einzelne Scenarios taggen. Tags beginnen mit "@" und werden dem Feature bzw Scenario vorangestellt.
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+![Docker](images/docker_720.png)
 
 
-```
-@javascript @api
-Scenario: Some description of the scenario
-  Given [some context]
-  When [some event]
-  Then [outcome]
-```
+## Docker
 
-Manche Tags haben Auswirkung auf die Abarbeitung der Tests, so benutzt ``@javascript`` z.b. das Selenium-Backend, was erlaubt Javascripts zu testen.
-						</script>
-					</section>
-				</section>
-				<section>
-					<section  data-markdown>
-						<script type="text/template">
-## Beispiele
+- Isolierung von System-Diensten / Applikationen in eigenen Containern
+- keine Virtualisierung
+- Linux Container (LXC) basiert
+- Provision über Textdateien
+- http://docker.io
 
-</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-```
-Scenario: View the Login page
-    When I go to "/user/login"
-    Then I should see "User account"
-    And I should see the following <links>
-      | links                    |
-      | Log in                   |
-      | Request new password     |
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-```
-@validation
-  Scenario Outline: Username validation: Valid username
-    When I go to "/user/login"
-    And I fill in "Username" with "<some_name>"
-    And I fill in "Password" with random text
-    And I press "Log in"
-    Then I should see "Sorry, unrecognized username or password."
-    And the field "Username" should be outlined in red
-  Examples:
-    | some_name |
-    | bla       |
-    | blubb     |
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-```
-  Scenario: Register ios device without app-id
-    Given that I want to register a new device
-      And that token of the device is "test-ios-token-wildcard"
-      And that type of the device is "ios"
-      And that language of the device is "en"
-    When I request "/exchange/push"
-    Then the response status code should be 200
-      And the response is JSON
-      And the JSON should contain "1" for key "success"
-```
-						</script>
-					</section>
-				</section>
-				<section>
-					<section  data-markdown>
-						<script type="text/template">
-## Tests in Drupal implementieren
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+## Fabric
 
-Behat schlägt einem ja schon vor, welche Funktionen zu implementieren sind. Dies kann man entweder as SubContext in einem Modul implementieren (wenn die Funktionalität weiterverwendet wird), oder in dem FeatureContext in ``bootstrap``.
-</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Implementierung für ein Modul:
+- python-basiertes Deployment- und Administrierungs-Tool
+- führt auf Servern SSH-Kommandos aus
+- http://www.fabfile.org
 
-Die PHP-Datei muss die Ending ``.behat.inc`` haben, damit sie gefunden wird und sollte in einem Unterordner ``test`` des Moduls liegen.
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+## Drush
 
-```
-use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
-use Behat\Behat\Context\BehatContext;
-use Behat\Behat\Exception\PendingException;
+- Command-Line-Interface und scripting interface für Drupal
+- http://drush.ws
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+## Fabalicious
 
-class MySubContext extends BehatContext implements
-  DrupalSubContextInterface {
+- Fabric-Tasks für wiederkehrende drupal-Administrations-Tasks
+- z.B: deployment: Backup der DB, git pull, feature-rever, Update DB, cache clear alle
+- Z.B: Migration: copyFrom Export von DB und User-Files von einer Instanz zur nächsten, z.b Update der Staging- oder lokalen Umgebung mit Daten der Live-Site.
+- Drupal-Core-Updates
+- Behat-Testing
+- Backup / Restore von DB + Files
+- docker-spezifische Tasks
+- https://github.com/factorial-io/fabalicious
 
-	public static function getAlias() {
-    return '<my-alias>';
-  }
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+## Das alles im täglichen Einsatz
 
-  public function __construct()
-  {
-  }
-};
-```
+- Vagrant + [Multibasebox](https://github.com/factorial-io/multibasebox) als virtueller Host für alle Docker Instanzen
+- [drupal-docker](https://github.com/factorial-io/drupal-docker) als Host für eine drupal-Applikation
+- drupal-docker lässt sich sowohl lokal als auch als dev-Installationen benutzen
+- fabalicious zum Rauf-, Runterfahren und Administration der Docker-Instanzen
+- einfaches Erstellen von Drupal-Installationen für feature-Branches
 
-[siehe](http://behat-drupal-extension.readthedocs.org/en/latest/subcontexts.html)
+            </script>
+          </section>
+        </section>
+        <section>
+          <section  data-markdown>
+            <script type="text/template">
+## jaMann
 
-
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Beispiel für nicht implementierte Step-Definitionen
-
-```
-Feature: Administer articles
-  In order to administer the articles
-  As an content editor
-  I should be able to see the list of articles
-
-  Scenario: Example
-    Given I am logged in as a content-editor
-      And I visit "/admin/content/articles"
-     Then I should get a list of articles
-
-```
-						</script>
-					</section>
-					<section  data-markdown>
-						<script type="text/template">
-## Behat-Vorschlag
-
-```
-You can implement step definitions for undefined steps with these snippets:
-
-  /**
-   * @Given /^I am logged in as a content-editor$/
-   */
-  public function iAmLoggedInAsAContentEditor() {
-    throw new PendingException();
-  }
-
-  /**
-   * @Then /^I should get a list of articles$/
-   */
-  public function iShouldGetAListOfArticles() {
-    throw new PendingException();
-  }
-```
-						</script>
-					</section>
-				</section>
+- Yeoman basierter Generator der einem automatisch eine neue Drupal-Installation in Multibasebox erstellt.
+- https://github.com/factorial-io/generator-jaMann
+            </script>
+          </section>
+        </section>
 			</div>
 		</div>
 
